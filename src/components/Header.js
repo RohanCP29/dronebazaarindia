@@ -4,7 +4,7 @@ import "../styles/Header.css";
 import { LANGUAGES, translations } from "../i18n";
 
 
-const Header = ({ language = 'en', onLanguageChange }) => (
+const Header = ({ language = 'en', onLanguageChange, searchValue = '', onSearchChange }) => (
   <header className="header">
     <div className="container header-content">
       <div className="logo-area">
@@ -18,6 +18,16 @@ const Header = ({ language = 'en', onLanguageChange }) => (
         <a href="#services">{translations[language].nav.services}</a>
         <a href="#contact">{translations[language].nav.contact}</a>
       </nav>
+      <div className="header-search" style={{ marginLeft: 24, display: 'flex', alignItems: 'center' }}>
+        <input
+          type="text"
+          placeholder={language === 'mr' ? 'शोधा...' : 'Search...'}
+          value={searchValue}
+          onChange={e => onSearchChange && onSearchChange(e.target.value)}
+          style={{ padding: '0.4rem 1rem', borderRadius: 6, border: '1px solid #ccc', fontSize: 16, minWidth: 180 }}
+          aria-label={language === 'mr' ? 'शोधा' : 'Search'}
+        />
+      </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', marginLeft: 16 }}>
         <label htmlFor="lang-select" style={{ fontWeight: 500, marginBottom: 2 }}>
           {language === 'mr' ? 'भाषा:' : 'Language:'}

@@ -32,7 +32,15 @@ const drones = [
   }
 ];
 
-function HomePage({ onContact, language }) {
+function HomePage({ onContact, language, searchValue = '' }) {
+  // Filter drones based on searchValue (search in name or description, case-insensitive)
+  const filteredDrones = drones.filter(drone => {
+    const name = translations[language].drones[drone.key].name.toLowerCase();
+    const description = translations[language].drones[drone.key].description.toLowerCase();
+    const search = searchValue.toLowerCase();
+    return name.includes(search) || description.includes(search);
+  });
+
   return (
     <div className="App">
       <main className="main-content">
@@ -72,7 +80,7 @@ function HomePage({ onContact, language }) {
         <section id="drones">
           <h2 className="section-title">{language === 'mr' ? 'आमचे ड्रोन' : 'Our Drones'}</h2>
           <div className="drones-list">
-            {drones.map((drone, idx) => (
+            {filteredDrones.map((drone, idx) => (
               <DroneCard
                 key={idx}
                 name={translations[language].drones[drone.key].name}
@@ -84,6 +92,11 @@ function HomePage({ onContact, language }) {
                 callToBuyText={translations[language].callNow}
               />
             ))}
+            {filteredDrones.length === 0 && (
+              <div style={{ textAlign: 'center', color: '#888', marginTop: 32 }}>
+                {language === 'mr' ? 'कोणतेही ड्रोन सापडले नाहीत.' : 'No drones found.'}
+              </div>
+            )}
           </div>
         </section>
         <ServicesSection language={language} />
@@ -116,14 +129,20 @@ function ContactModal({ open, onClose }) {
 function App() {
   const [showModal, setShowModal] = useState(false);
   const [language, setLanguage] = React.useState('en');
+  const [searchValue, setSearchValue] = React.useState('');
   const openContact = () => setShowModal(true);
   const closeContact = () => setShowModal(false);
   return (
     <BrowserRouter>
       <ContactModal open={showModal} onClose={closeContact} />
-      <Header language={language} onLanguageChange={setLanguage} />
+      <Header
+        language={language}
+        onLanguageChange={setLanguage}
+        searchValue={searchValue}
+        onSearchChange={setSearchValue}
+      />
       <Routes>
-        <Route path="/" element={<HomePage onContact={openContact} language={language} />} />
+        <Route path="/" element={<HomePage onContact={openContact} language={language} searchValue={searchValue} />} />
         <Route path="/services/:category" element={<ServiceCategoryPage onContact={openContact} language={language} />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy language={language} />} />
       </Routes>
