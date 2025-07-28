@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/Header.css";
 import { LANGUAGES, translations } from "../i18n";
 
@@ -7,8 +8,10 @@ const Header = ({ language = 'en', onLanguageChange }) => (
   <header className="header">
     <div className="container header-content">
       <div className="logo-area">
-        <img src="/logo_main.png" alt={translations[language].siteName + ' Logo'} className="logo-img" />
-        <span className="logo-text">{translations[language].siteName}</span>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+          <img src="/logo_main.png" alt={translations[language].siteName + ' Logo'} className="logo-img" />
+          <span className="logo-text">{translations[language].siteName}</span>
+        </Link>
       </div>
       <nav className="nav">
         <a href="#drones">{translations[language].nav.drones}</a>

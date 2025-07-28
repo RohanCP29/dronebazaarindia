@@ -10,7 +10,7 @@ const services = [
   { key: "motor" },
   { key: "propeller" },
   { key: "camera" },
-  { key: "carbonFibre" },
+  { key: "frames" },
   { key: "connectors" },
   { key: "esc" },
   { key: "gps" },
