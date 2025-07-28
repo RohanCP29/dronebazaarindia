@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/DroneCard.css";
 
-const DroneCard = ({ name, price, image, description, contact }) => {
+const DroneCard = ({ name, price, image, description, contact, onContact }) => {
   // Remove commas and parse price as number
   const numericPrice = Number(String(price).replace(/,/g, ""));
   const discount = 0.10;
@@ -19,10 +19,14 @@ const DroneCard = ({ name, price, image, description, contact }) => {
         <p className="drone-price">
           Price: <span style={{ textDecoration: 'line-through', color: '#888' }}>₹{numericPrice.toLocaleString()}</span>
           <span style={{ color: '#7ed957', fontWeight: 'bold', marginLeft: 8 }}>
-            ₹{discountedPrice.toLocaleString()} <span style={{fontSize: '0.95em', color: '#444'}}>(10% OFF)</span>
+            ₹{discountedPrice.toLocaleString()} <span style={{fontSize: '0.95em', color: '#FF0000'}}>(10% OFF)</span>
           </span>
         </p>
-        <a className="drone-contact" href={`tel:${contact}`}>Call to Buy</a>
+        {typeof onContact === 'function' ? (
+          <button className="drone-contact" onClick={onContact}>Call to Buy</button>
+        ) : (
+          <a className="drone-contact" href={`tel:${contact}`}>Call to Buy</a>
+        )}
       </div>
     </div>
   );

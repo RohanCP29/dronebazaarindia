@@ -7,6 +7,7 @@ const Header = () => (
       <h1 className="logo">DroneBaazar India</h1>
       <nav className="nav">
         <a href="#drones">Drones</a>
+        <a href="#services">Services</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>

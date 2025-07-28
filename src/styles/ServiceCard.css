@@ -1,0 +1,30 @@
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  margin: 1rem auto;
+  max-width: 180px;
+  min-width: 120px;
+  min-height: 150px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 0.5rem;
+}
+.service-card:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 4px 24px rgba(126,217,87,0.12);
+}
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.7rem;
+}
+.service-name {
+  font-size: 1.1rem;
+  color: #23272f;
+  font-weight: 500;
+  text-align: center;
+}
