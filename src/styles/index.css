@@ -1,0 +1,19 @@
+/* Reset some default browser styles for consistency */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #f5f8fa;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
