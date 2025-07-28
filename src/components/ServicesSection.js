@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 import { translations } from "../i18n";
 
 const services = [
-  { name: "Battery" },
-  { name: "Flight Controller" },
-  { name: "Motor" },
-  { name: "Propeller" },
-  { name: "Camera" },
-  { name: "Carbon Fibre" },
-  { name: "Connectors" },
-  { name: "Electronic Speed Controllers" },
-  { name: "GPS" },
-  { name: "Wires" }
+  { key: "battery" },
+  { key: "flightController" },
+  { key: "motor" },
+  { key: "propeller" },
+  { key: "camera" },
+  { key: "carbonFibre" },
+  { key: "connectors" },
+  { key: "esc" },
+  { key: "gps" },
+  { key: "wires" }
 ];
 
 
@@ -23,10 +23,10 @@ const ServicesSection = ({ language = 'en' }) => (
     <h2 className="section-title">{translations[language].ourServices}</h2>
     <div className="services-list">
       {services.map((service, idx) => {
-        const urlName = service.name.toLowerCase().replace(/ /g, "-");
+        const urlName = service.key.toLowerCase();
         return (
           <Link key={idx} to={`/services/${urlName}`} style={{ textDecoration: 'none' }}>
-            <ServiceCard name={service.name} icon={service.icon} />
+            <ServiceCard name={translations[language].serviceNames[service.key]} icon={service.icon} />
           </Link>
         );
       })}

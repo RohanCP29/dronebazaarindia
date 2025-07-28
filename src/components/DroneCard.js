@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/DroneCard.css";
 
-const DroneCard = ({ name, price, image, description, contact, onContact }) => {
+const DroneCard = ({ name, price, image, description, contact, onContact, callToBuyText }) => {
   // Remove commas and parse price as number
   const numericPrice = Number(String(price).replace(/,/g, ""));
   const discount = 0.10;
@@ -23,9 +23,9 @@ const DroneCard = ({ name, price, image, description, contact, onContact }) => {
           </span>
         </p>
         {typeof onContact === 'function' ? (
-          <button className="drone-contact" onClick={onContact}>Call to Buy</button>
+          <button className="drone-contact" onClick={onContact}>{callToBuyText}</button>
         ) : (
-          <a className="drone-contact" href={`tel:${contact}`}>Call to Buy</a>
+          <a className="drone-contact" href={`tel:${contact}`}>{callToBuyText}</a>
         )}
       </div>
     </div>

@@ -12,25 +12,22 @@ import "./styles/App.css";
 
 const drones = [
   {
-    name: "Aerial Pro X1",
+    key: "aerialProX1",
     price: "1,20,000",
     // Replace with your image path in public/assets or src/assets
     image: "https://via.placeholder.com/300x180?text=Drone+1",
-    description: "Professional drone with 4K camera, 30min flight time, GPS, and advanced stabilization.",
     contact: "9876543210"
   },
   {
-    name: "SkyMaster 200",
+    key: "skyMaster200",
     price: "95,000",
     image: "https://via.placeholder.com/300x180?text=Drone+2",
-    description: "Compact drone for hobbyists, HD camera, 20min flight, easy controls.",
     contact: "9876543210"
   },
   {
-    name: "AgriFlyer",
+    key: "agriFlyer",
     price: "2,10,000",
     image: "https://via.placeholder.com/300x180?text=Drone+3",
-    description: "Agricultural drone for crop monitoring and spraying, robust and reliable.",
     contact: "9876543210"
   }
 ];
@@ -76,7 +73,16 @@ function HomePage({ onContact, language }) {
           <h2 className="section-title">{language === 'mr' ? 'आमचे ड्रोन' : 'Our Drones'}</h2>
           <div className="drones-list">
             {drones.map((drone, idx) => (
-              <DroneCard key={idx} {...drone} onContact={onContact} />
+              <DroneCard
+                key={idx}
+                name={translations[language].drones[drone.key].name}
+                description={translations[language].drones[drone.key].description}
+                price={drone.price}
+                image={drone.image}
+                contact={drone.contact}
+                onContact={onContact}
+                callToBuyText={translations[language].callNow}
+              />
             ))}
           </div>
         </section>
