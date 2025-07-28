@@ -1,0 +1,68 @@
+.happy-customers-section {
+  background: linear-gradient(90deg, #f8fafc 60%, #e0e7ff 100%);
+  padding: 60px 0 40px 0;
+  text-align: center;
+}
+
+.happy-customers-title {
+  font-size: 2.3rem;
+  color: #2d3a5a;
+  margin-bottom: 32px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.happy-customers-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.customer-card {
+  width: 350px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.11);
+  padding: 28px 24px;
+  position: relative;
+  opacity: 0;
+  transform: translateX(0);
+  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.customer-card.left {
+  border-left: 6px solid #6366f1;
+  align-self: flex-start;
+  transform: translateX(-60px);
+}
+.customer-card.right {
+  border-right: 6px solid #f59e42;
+  align-self: flex-end;
+  transform: translateX(60px);
+}
+
+.customer-card.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.customer-feedback {
+  font-size: 1.1rem;
+  color: #374151;
+  margin-bottom: 12px;
+}
+
+.customer-name {
+  font-size: 1rem;
+  color: #6366f1;
+  font-weight: 500;
+  text-align: right;
+}
+
+@media (max-width: 500px) {
+  .customer-card {
+    width: 90vw;
+    padding: 18px 10px;
+  }
+}

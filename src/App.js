@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
+import { translations } from "./i18n";
 import Footer from "./components/Footer";
 import DroneCard from "./components/DroneCard";
 import ServicesSection from "./components/ServicesSection";
+import HappyCustomers from "./components/HappyCustomers";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 import ServiceCategoryPage from "./components/ServiceCategoryPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/App.css";
@@ -32,31 +35,60 @@ const drones = [
   }
 ];
 
-function HomePage({ onContact }) {
+function HomePage({ onContact, language }) {
   return (
     <div className="App">
-      <Header />
       <main className="main-content">
-        <section className="hero">
-          <h2 className="section-title">Welcome to DroneBaazar India</h2>
-          <p style={{textAlign: 'center', color: '#555', maxWidth: 600, margin: '0 auto'}}>Your trusted source for the latest drones in India. Explore our range, compare prices, and contact us to buy your perfect drone!</p>
+        <section
+          className="hero"
+          style={{
+            background: `linear-gradient(rgba(44,62,80,0.28), rgba(44,62,80,0.32)), url('/assets/backimage.png') center/cover no-repeat`,
+            padding: 'clamp(2rem, 7vw, 4rem) 1rem clamp(1.2rem, 4vw, 2.5rem) 1rem',
+            minHeight: 'clamp(180px, 40vw, 340px)'
+          }}
+        >
+          <h2
+            className="section-title"
+            style={{
+              fontSize: 'clamp(1.1rem, 6vw, 2.5rem)',
+              margin: 0,
+              color: '#fff',
+              textShadow: '0 2px 12px rgba(44,62,80,0.22)'
+            }}
+          >
+            {translations[language].heroTitle}
+          </h2>
+          <p
+            style={{
+              textAlign: 'center',
+              color: '#f3f5fa',
+              maxWidth: 700,
+              margin: '0 auto',
+              fontSize: 'clamp(0.9rem, 3.5vw, 1.25rem)',
+              fontWeight: 500,
+              textShadow: '0 1px 8px rgba(44,62,80,0.18)'
+            }}
+          >
+            {translations[language].heroDesc}
+          </p>
         </section>
         <section id="drones">
-          <h2 className="section-title">Our Drones</h2>
+          <h2 className="section-title">{language === 'mr' ? 'आमचे ड्रोन' : 'Our Drones'}</h2>
           <div className="drones-list">
             {drones.map((drone, idx) => (
               <DroneCard key={idx} {...drone} onContact={onContact} />
             ))}
           </div>
         </section>
-        <ServicesSection />
+        <ServicesSection language={language} />
+        <HappyCustomers language={language} />
         <section id="contact">
-          <h2 className="section-title">Contact Us</h2>
-          <p>Call us for more info or to place an order:</p>
-          <button className="contact-btn" onClick={onContact}>Call Now</button>
+          <h2 className="section-title">{translations[language].contactUs}</h2>
+          <p>{language === 'mr' ? 'अधिक माहितीसाठी किंवा ऑर्डर देण्यासाठी आम्हाला कॉल करा:' : 'Call us for more info or to place an order:'}</p>
+          <button className="contact-btn" onClick={onContact}>{translations[language].callNow}</button>
         </section>
       </main>
-      <Footer />
+      <Footer language={language} />
     </div>
   );
 }
@@ -77,14 +109,17 @@ function ContactModal({ open, onClose }) {
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+  const [language, setLanguage] = React.useState('en');
   const openContact = () => setShowModal(true);
   const closeContact = () => setShowModal(false);
   return (
     <BrowserRouter>
       <ContactModal open={showModal} onClose={closeContact} />
+      <Header language={language} onLanguageChange={setLanguage} />
       <Routes>
-        <Route path="/" element={<HomePage onContact={openContact} />} />
-        <Route path="/services/:category" element={<ServiceCategoryPage onContact={openContact} />} />
+        <Route path="/" element={<HomePage onContact={openContact} language={language} />} />
+        <Route path="/services/:category" element={<ServiceCategoryPage onContact={openContact} language={language} />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy language={language} />} />
       </Routes>
     </BrowserRouter>
   );

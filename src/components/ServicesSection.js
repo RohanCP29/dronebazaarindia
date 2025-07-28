@@ -2,6 +2,7 @@ import React from "react";
 import ServiceCard from "./ServiceCard";
 import "../styles/ServicesSection.css";
 import { Link } from "react-router-dom";
+import { translations } from "../i18n";
 
 const services = [
   { name: "Battery" },
@@ -16,9 +17,10 @@ const services = [
   { name: "Wires" }
 ];
 
-const ServicesSection = () => (
+
+const ServicesSection = ({ language = 'en' }) => (
   <section id="services">
-    <h2 className="section-title">Our Services</h2>
+    <h2 className="section-title">{translations[language].ourServices}</h2>
     <div className="services-list">
       {services.map((service, idx) => {
         const urlName = service.name.toLowerCase().replace(/ /g, "-");
